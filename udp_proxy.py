@@ -26,7 +26,7 @@ class Proxy2Server(Thread):
 
             try:
                 importlib.reload(parser)
-                parser.parse(serverAddressPort[0], data)
+                parser.parse(serverAddressPort[0], data, "server")
             except Exception as e:
                 print(e)
 
@@ -59,7 +59,7 @@ class Game2Proxy(Thread):
 
             try:
                 importlib.reload(parser)
-                parser.parse(self.gameAddressPort[0], data)
+                parser.parse(self.gameAddressPort[0], data, "client")
             except Exception as e:
                 print(e)
 
@@ -105,6 +105,7 @@ def main():
     master = Proxy("95.216.217.79", 30000)
     master.start()
     while True:
+        # You can add further injection logic here
         try:
             choice = input("CMD: ")
             if choice == "q" or choice == "Q":
